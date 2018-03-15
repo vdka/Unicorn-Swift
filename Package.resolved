@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CUnicorn",
+        "repositoryURL": "/Users/vdka/Source/vdka/CUnicorn",
+        "state": {
+          "branch": "master",
+          "revision": "52343e23bd4fb7fa40bd990ea7a0468f5954cd82",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
