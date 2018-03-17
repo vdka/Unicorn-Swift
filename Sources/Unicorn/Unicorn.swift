@@ -561,6 +561,37 @@ public func emuStop(_ uc: Engine!) throws {
 }
 
 /*
+ Register callback for a hook event.
+ The callback will be run when the hook event is hit.
+
+ @uc: handle returned by uc_open()
+ @hh: hook handle returned from this registration. To be used in uc_hook_del() API
+ @type: hook type
+ @callback: callback to be run when instruction is hit
+ @user_data: user-defined data. This will be passed to callback function in its
+ last argument @user_data
+ @begin: start address of the area where the callback is effect (inclusive)
+ @end: end address of the area where the callback is effect (inclusive)
+ NOTE 1: the callback is called only if related address is in range [@begin, @end]
+ NOTE 2: if @begin > @end, callback is called whenever this hook type is triggered
+ @...: variable arguments (depending on @type)
+ NOTE: if @type = UC_HOOK_INSN, this is the instruction ID (ex: UC_X86_INS_OUT)
+
+ @return UC_ERR_OK on success, or other value on failure (refer to uc_err enum
+ for detailed error).
+ */
+public func hookAdd(_ uc: Engine!, _ hh: inout Hook, type: HookType, callback: UnsafeMutableRawPointer!, begin: UInt64, end: UInt64, _ args: CVarArg...) throws {
+    let err = withVaList(args, { uc_hook_add_shim(uc, &hh, numericCast(type.rawValue.rawValue), callback, nil, begin, end, $0) })
+    if err != UC_ERR_OK {
+        throw UnicornError(rawValue: err)
+    }
+}
+
+//UNICORN_EXPORT
+//uc_err uc_hook_add(uc_engine *uc, uc_hook *hh, int type, void *callback,
+//    void *user_data, uint64_t begin, uint64_t end, ...);
+
+/*
  Unregister (remove) a hook callback.
  This API removes the hook callback registered by uc_hook_add().
  NOTE: this should be called only when you no longer want to trace.
