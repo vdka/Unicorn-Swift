@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "CUnicorn",
-        "repositoryURL": "/Users/vdka/Source/vdka/CUnicorn",
+        "repositoryURL": "https://github.com/vdka/CUnicorn.git",
         "state": {
           "branch": "master",
           "revision": "790db6f421b7b09695f48ea8aa312b692f9296d4",

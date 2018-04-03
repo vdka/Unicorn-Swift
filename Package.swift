@@ -10,7 +10,7 @@ let package = Package(
         .library(name: "UnicornARM64", targets: ["UnicornARM64"]),
     ],
     dependencies: [
-        .package(url: "../CUnicorn", .branch("master")),
+        .package(url: "https://github.com/vdka/CUnicorn.git", .branch("master")),
     ],
     targets: [
         .target(name: "Unicorn", dependencies: []),
