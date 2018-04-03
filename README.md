@@ -1,3 +1,4 @@
 # Unicorn-Swift
 
-A description of this package.
+Swift binding for [unicorn-engine](https://github.com/unicorn-engine/unicorn).
+
